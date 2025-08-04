@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# Node
+node_modules/
+.next/
+.env.local
+
+# General
+uploaded_files/
+.DS_Store

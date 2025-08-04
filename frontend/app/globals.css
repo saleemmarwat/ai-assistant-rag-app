@@ -1,0 +1,77 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --sidebar-bg: #f4f4f4;
+  --sidebar-border: #dddddd;
+  --button-bg: #007bff;
+  --button-text: #ffffff;
+  --input-border: #ccc;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --sidebar-bg: #1a1a1a;
+    --sidebar-border: #333;
+    --button-bg: #1e90ff;
+    --button-text: #ffffff;
+    --input-border: #444;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+button {
+  padding: 8px;
+  margin: 4px 0;
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+}
+
+button {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: darken(var(--button-bg), 10%);
+}
+
+input:focus,
+button:focus {
+  outline: none;
+  border-color: var(--button-bg);
+}
+
+aside {
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+}
