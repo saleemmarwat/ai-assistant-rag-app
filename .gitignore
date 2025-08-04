@@ -4,12 +4,22 @@ __pycache__/
 *.pyo
 *.pyd
 .env
+*.log
 
-# Node
+# Node / Next.js
 node_modules/
 .next/
 .env.local
 
-# General
-uploaded_files/
+# VSCode
+.vscode/
+
+# OS-specific
 .DS_Store
+Thumbs.db
+
+# App-specific
+uploaded_files/
+frontend.zip
+frontend.rar
+backend/chroma_db/
