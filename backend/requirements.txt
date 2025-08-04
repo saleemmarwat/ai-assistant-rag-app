@@ -4,12 +4,15 @@ python-dotenv==1.0.1
 pydantic==2.8.2
 
 # LangChain split packages
+
 langchain==0.2.6
 langchain-community==0.2.6
 langchain-openai==0.1.7
-langchain-chroma==0.1.1
+langchain-chroma==0.2.2
+
 
 # Vector DB
 chromadb==0.4.24   # (stable, avoids the tenant issue)
 tiktoken==0.7.0
-pypdf
+pypdf==3.17.4
+
