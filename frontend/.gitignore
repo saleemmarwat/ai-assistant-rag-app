@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.log
+
+# Node / Next.js
+node_modules/
+.next/
+.env.local
+
+# VSCode
+.vscode/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# App-specific
+uploaded_files/
+frontend.zip
+frontend.rar
+backend/chroma_db/
