@@ -1,4 +1,4 @@
-# app/rag.py
+# app/rag.py 
 
 from dotenv import load_dotenv
 import os
@@ -10,6 +10,10 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader, PyPDFLoader
 from langchain_core.documents import Document
 from langchain.chains.retrieval_qa.base import RetrievalQA
+
+# ✅ Fallback token estimator (replaces tiktoken)
+def rough_token_len(text: str) -> int:
+    return len(text) // 4  # approx. 1 token ≈ 4 characters
 
 # Load environment variables
 load_dotenv()
@@ -32,7 +36,11 @@ def get_vectorstore(user_id: str) -> Chroma:
     )
 
 def add_docs_to_vectorstore(file_paths: List[str], user_id: str) -> int:
-    splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=1000,
+        chunk_overlap=100,
+        length_function=rough_token_len  # ✅ use fallback
+    )
     docs: List[Document] = []
 
     for fp in file_paths:
