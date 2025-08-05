@@ -1,17 +1,28 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '../../lib/supabaseClient';
 import ChatSidebar from '../../components/ChatSidebar';
+import type { User } from '@supabase/supabase-js';
+
+// ✅ Chat type for supabase 'chats' table
+type Chat = {
+  id: number;
+  user_id: string;
+  query: string;
+  answer: string;
+  created_at: string;
+};
 
 export default function RagPage() {
   const router = useRouter();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [query, setQuery] = useState('');
   const [answer, setAnswer] = useState('');
   const [uploading, setUploading] = useState(false);
-  const [chatHistory, setChatHistory] = useState<any[]>([]);
+  const [chatHistory, setChatHistory] = useState<Chat[]>([]);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -19,12 +30,12 @@ export default function RagPage() {
       if (!sessionUser) {
         router.push('/');
       } else {
-        console.log("✅ Logged in as:", sessionUser.id);  // <== Ensure UUID
+        console.log("✅ Logged in as:", sessionUser.id);
         setUser(sessionUser);
         fetchChatHistory(sessionUser.id);
       }
     });
-  }, []);
+  }, [router]); // ✅ Added 'router' to dependency array
 
   const fetchChatHistory = async (userId: string) => {
     const { data, error } = await supabase
@@ -33,15 +44,15 @@ export default function RagPage() {
       .eq('user_id', userId)
       .order('created_at', { ascending: false });
 
-    if (!error && data) setChatHistory(data);
+    if (!error && data) setChatHistory(data as Chat[]);
   };
 
   const handleUpload = async () => {
     if (!file || !user) return;
 
-    console.log("📤 Uploading file for user:", user.id);  // Debug UUID
-
+    console.log("📤 Uploading file for user:", user.id);
     setUploading(true);
+
     const formData = new FormData();
     formData.append('file', file);
     formData.append('user_id', user.id);
@@ -70,7 +81,7 @@ export default function RagPage() {
   const handleQuery = async () => {
     if (!query || !user) return;
 
-    console.log("💬 Asking question as:", user.id);  // Debug UUID
+    console.log("💬 Asking question as:", user.id);
 
     const res = await fetch('http://localhost:8000/query', {
       method: 'POST',
