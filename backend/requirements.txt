@@ -16,6 +16,7 @@ chromadb==0.4.24   # (stable, avoids the tenant issue)
 #tiktoken==0.6.0
 
 
+supabase
 
 pypdf==3.17.4
 
