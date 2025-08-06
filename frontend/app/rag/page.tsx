@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '../../lib/supabaseClient';
-import ChatSidebar from '../../components/ChatSidebar';
+//import ChatSidebar from '../../components/ChatSidebar';
 import type { User } from '@supabase/supabase-js';
 
 // ✅ Chat type for supabase 'chats' table
@@ -101,7 +101,7 @@ export default function RagPage() {
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
-      <ChatSidebar chat={chatHistory} />
+      {/* <ChatSidebar chat={chatHistory} /> */}
       <main style={{ flex: 1, padding: 40, position: 'relative' }}>
         <div style={{
           position: 'absolute',
