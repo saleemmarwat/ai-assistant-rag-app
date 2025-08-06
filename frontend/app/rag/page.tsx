@@ -3,17 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '../../lib/supabaseClient';
-//import ChatSidebar from '../../components/ChatSidebar';
 import type { User } from '@supabase/supabase-js';
-
-// ✅ Chat type for supabase 'chats' table
-type Chat = {
-  id: number;
-  user_id: string;
-  query: string;
-  answer: string;
-  created_at: string;
-};
 
 export default function RagPage() {
   const router = useRouter();
@@ -22,7 +12,6 @@ export default function RagPage() {
   const [query, setQuery] = useState('');
   const [answer, setAnswer] = useState('');
   const [uploading, setUploading] = useState(false);
-  //const [chatHistory, setChatHistory] = useState<Chat[]>([]);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -32,20 +21,9 @@ export default function RagPage() {
       } else {
         console.log("✅ Logged in as:", sessionUser.id);
         setUser(sessionUser);
-        //fetchChatHistory(sessionUser.id);
       }
     });
-  }, [router]); // ✅ Added 'router' to dependency array
-
-  const fetchChatHistory = async (userId: string) => {
-    const { data, error } = await supabase
-      .from('chats')
-      .select('*')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false });
-
-    //if (!error && data) setChatHistory(data as Chat[]);
-  };
+  }, [router]);
 
   const handleUpload = async () => {
     if (!file || !user) return;
@@ -91,7 +69,6 @@ export default function RagPage() {
 
     const data = await res.json();
     setAnswer(data.answer);
-    fetchChatHistory(user.id);
   };
 
   const logout = async () => {
@@ -101,7 +78,6 @@ export default function RagPage() {
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
-      {/* <ChatSidebar chat={chatHistory} /> */}
       <main style={{ flex: 1, padding: 40, position: 'relative' }}>
         <div style={{
           position: 'absolute',
