@@ -22,7 +22,7 @@ export default function RagPage() {
   const [query, setQuery] = useState('');
   const [answer, setAnswer] = useState('');
   const [uploading, setUploading] = useState(false);
-  const [chatHistory, setChatHistory] = useState<Chat[]>([]);
+  //const [chatHistory, setChatHistory] = useState<Chat[]>([]);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -32,7 +32,7 @@ export default function RagPage() {
       } else {
         console.log("✅ Logged in as:", sessionUser.id);
         setUser(sessionUser);
-        fetchChatHistory(sessionUser.id);
+        //fetchChatHistory(sessionUser.id);
       }
     });
   }, [router]); // ✅ Added 'router' to dependency array
