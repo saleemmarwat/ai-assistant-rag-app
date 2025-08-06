@@ -101,7 +101,7 @@ export default function RagPage() {
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
-      <ChatSidebar chatHistory={chatHistory} />
+      <ChatSidebar chat={chatHistory} />
       <main style={{ flex: 1, padding: 40, position: 'relative' }}>
         <div style={{
           position: 'absolute',
