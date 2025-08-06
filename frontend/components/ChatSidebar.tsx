@@ -1,4 +1,9 @@
-export default function ChatSidebar({ chat }: { chat?: any[] }) {
+type ChatItem = {
+  question: string;
+  answer: string;
+};
+
+export default function ChatSidebar({ chat }: { chat?: ChatItem[] }) {
   return (
     <aside style={{ width: 300, background: '#f4f4f4', padding: 20, height: '100vh', overflowY: 'auto' }}>
       <h3 style={{ marginBottom: 16 }}>🕘 Chat History</h3>
