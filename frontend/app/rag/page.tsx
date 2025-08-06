@@ -44,7 +44,7 @@ export default function RagPage() {
       .eq('user_id', userId)
       .order('created_at', { ascending: false });
 
-    if (!error && data) setChatHistory(data as Chat[]);
+    //if (!error && data) setChatHistory(data as Chat[]);
   };
 
   const handleUpload = async () => {
