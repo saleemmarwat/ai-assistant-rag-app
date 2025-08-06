@@ -1,7 +1,12 @@
 // app/layout.tsx
+import { ReactNode } from 'react';
 import { AuthProvider } from '@/context/AuthContext';
 
-export default function RootLayout({ children }) {
+type RootLayoutProps = {
+  children: ReactNode;
+};
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html>
       <body>
